@@ -1,63 +1,65 @@
 const Customer = require('../models/CustomerModel')
 
-//add Employee
+/* get all Customers ( GET )*/
+exports.getCustomers = async(req,res) =>{
+    const cus = await Customer.find()
+
+    if(!cus){
+        res.status(401).json({
+            success: false,
+            message: 'get all customers details unsuccessful'
+        })
+    }
+
+    res.status(200).json({
+        success: true,
+        cus
+    })
+}
+
+/* get Customer By Id ( GET )*/
+exports.getCustomer = async(req,res) =>{
+    const cus = await Customer.findById(req.params.id)
+
+    if(!cus){
+        res.status(401).json({
+            success: false,
+            message: 'get Customer unsuccessful'
+        })
+    }
+
+    res.status(200).json({
+        success: true,
+        cus
+    })
+}
+
+/*add customer ( POST ) */
 exports.addCustomer= async(req,res) =>{
     const cus = await Customer.create(req.body)
 
     if(!cus){
         res.status(401).json({
             success: false,
-            message: 'Insert Error'
+            message: 'Insert Customer Unsuccesfull'
         })
     }
 
     res.status(200).json({
         success: true,
+        message: 'Customer inserted successfully',
         cus
     })
 }
 
-//get employees
-exports.getCustomer = async(req,res) =>{
-    const cus = await Customer.find()
-
-    if(!cus){
-        res.status(401).json({
-            success: false,
-            message: 'get customer failed'
-        })
-    }
-
-    res.status(200).json({
-        success: true,
-        cus
-    })
-}
-
-//get Customer By Id
-exports.getCustomerById = async(req,res) =>{
-    const cus = await Customer.findById(req.params.id)
-
-    if(!cus){
-        res.status(401).json({
-            success: false,
-            message: 'get Customer was failed'
-        })
-    }
-
-    res.status(200).json({
-        success: true,
-        cus
-    })
-}
-
+/* delete customer ( DELETE ) */
 exports.deleteCustomer = async (req,res) =>{
     const cus = await Customer.findByIdAndDelete(req.params.id)
 
     if(!cus){
         res.status(401).json({
             success: false,
-            message: 'delete Customer was failed'
+            message: 'delete Customer unsuccessful'
         })
     }
 
@@ -67,10 +69,10 @@ exports.deleteCustomer = async (req,res) =>{
     })
 }
 
+/* update customer ( PUT ) */
 exports.updateCustomer = async (req, res) => {
 
     let cus = await Customer.findById(req.params.id);
-
 
     if (!cus) {
         return res.status(404).json({
@@ -90,5 +92,3 @@ exports.updateCustomer = async (req, res) => {
         cus
     })
 }
-
-//test comment
