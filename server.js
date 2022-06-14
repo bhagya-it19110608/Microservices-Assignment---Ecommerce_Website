@@ -5,6 +5,8 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const path = require('path')
 
+
+
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
@@ -12,9 +14,14 @@ app.use(cors())
 
 
 
+
+
+
+
 // import Routes
 app.use('/ecom', require('./routes/Customer'))
 app.use('/ecom', require('./routes/Feedback'))
+app.use('/ecom', require('./routes/Product'))
 
 
 
@@ -32,4 +39,8 @@ mongoose.connect(URI, {
 const PORT = process.env.PORT || 8089
 app.listen(PORT, () =>{
     console.log('Server is running on port', PORT)
+
 })
+
+
+
