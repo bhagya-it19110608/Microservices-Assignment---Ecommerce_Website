@@ -5,14 +5,15 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const path = require('path')
 
-
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors())
 
 
+
 // import Routes
+app.use('/ecom', require('./routes/Customer'))
 app.use('/ecom', require('./routes/Feedback'))
 
 
