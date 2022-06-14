@@ -15,18 +15,14 @@ const FeedbackSchema = mongoose.Schema({
     },
     contactNumber:{
         type: Number,
-        required:true
+        required:true,
+        minLength: [10, 'Add valid phone number'],
+        select: false
     },
     email:{
         type: String,
         required: [true, 'Please Enter Your Email'],
-        unique: true,
-    },
-    password:{
-        type: String,
-        required: [true, 'Please Enter Password'],
-        minLength: [6, 'Your Password must be longer than 6 characters'],
-        select: false
+        unique: true
     }
 })
 
